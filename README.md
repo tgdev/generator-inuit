@@ -1,4 +1,4 @@
-# generator-inuit [![Build Status](https://secure.travis-ci.org/tgdev/generator-inuit.png?branch=master)](https://travis-ci.org/tgdev/generator-inuit)
+# generator-inuit
 
 A [Yeoman](http://yeoman.io) generator for Harry Robert's [inuit](http://inuitcss.com) css framework.
 
@@ -39,8 +39,8 @@ Choose from list of grunt task to generate custom package.json and grunt files.
 
 Saying no to grunt will generate a basic watch file to watch for Sass changes via the command line
 
-### Object/Abstration loading
-Choose which inuit objects you want to use in your project or, just hit enter to skip this step and choose them later.
+### Inuit Objects & Abstractions
+Choose which inuit objects/abstractions you want to use in your project. To skip this step, simply press enter as these can be configured manually once your project has been generated via the _vars.scss file.
 
 ### Sass module subgenerator
 Create new Sass modules from the command line and let the generator automatically create the file in 'app/css/src/modules' and add the @import statement to style.scss
