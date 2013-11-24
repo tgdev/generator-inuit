@@ -21,20 +21,42 @@ InuitGenerator.prototype.askFor = function askFor() {
 
   // have Yeoman greet the user.
   console.log(this.yeoman);
-  console.log('This will install the inuit css framework created by Harry Roberts with a few optional extras.\n
-    For documentation and demos visit: http://inuitcss.com/\n\n');
+  console.log('This will install the inuit css framework created by Harry Roberts with a few optional extras.');
+  console.log('For documentation and demos visit: http://inuitcss.com/');
   console.log('*** NOTE: Inuit.css requires Sass 3.2 ***');
 
   var prompts = [
+    // {
+    //   type: 'checkbox',
+    //   name: 'activatedObjects',
+    //   message: 'Choose which of inuit\'s css modules you\'d like to use.\n' +
+    //    'Simply press enter to skip this step - you can configure these later in _vars.scss.',
+    //   choices: [
+    //     {
+    //       name: 'grids'
+    //     },
+    //     {
+    //       name: 'media'
+    //     }
+    //   ]
+    // },
     {
       type: 'confirm',
-      name: 'someOption',
-      message: 'Want to choose this option?'
+      name: 'setupSMACSS',
+      message: 'SMACSS helps structure your css into manageable modules. Would you like to include it?'
+    },
+    {
+      type: 'confirm',
+      name: 'useGrunt',
+      message: 'Would you like to automate your workflow with Grunt?',
+      default: true
     }
   ];
 
   this.prompt(prompts, function (props) {
-    this.someOption = props.someOption;
+    // this.activatedObjects = props.activatedObjects;
+    this.setupSMACSS = props.setupSMACSS;
+    this.useGrunt = props.useGrunt;
 
     cb();
   }.bind(this));
@@ -52,16 +74,58 @@ InuitGenerator.prototype.app = function app() {
 };
 
 InuitGenerator.prototype.projectfiles = function projectfiles() {
-  this.bowerInstall('inuit.css', { save:true })
-    .on('end', function (installed) {
-      console.log('Inuit.css installed successfully!');
-      // console.log(installed);
-    })
-    .on('error', function (err) {
-      console.log(err);
-    });
+  this.bowerInstall('inuit.css', { save:true });
   this.template('_vars.scss', 'app/css/_vars.scss');
   this.template('style.scss', 'app/css/style.scss');
   this.copy('editorconfig', '.editorconfig');
   this.copy('jshintrc', '.jshintrc');
 };
+
+// InuitGenerator.prototype.smacss = function smacss() {
+//   if(setupSMACSS) {
+//     // add extra directories
+//     this.mkdir('app/css/modules');
+//     this.mkdir('app/css/plugins');
+    
+//     // store smacss files in an array
+//     var smacssFiles = [
+//       '1-base',
+//       '2-layout',
+//       '3-states',
+//       '4-theme'
+//     ];
+
+//     // prepare content before updating style.scss
+//     var insert = '';
+
+//     // loop through smacss files
+//     for(var i = 0; i < smacssFiles.length; i++) {
+//       // copy files over to project
+//       this.copy('smacss/_'+ smacssFiles[i] + '.scss', 'app/css/src/_' + filesToMove[i] + '.scss');
+//       // import files into main stylesheet
+//       insert += '@import "css/src/' + smacssFiles[i] + '"\n';
+//     }
+
+//     InuitGenerator.prototype._updateFile('style-hook', 'app/css/style.scss', insert);
+
+//     console.log('SMACSS setup complete')
+//   }
+// };
+
+// InuitGenerator.prototype.gruntfile = function gruntfile() {
+//   if(this.useGrunt) {
+//     this.copy('Gruntfile.js', 'Gruntfile.js');
+//   } else {
+//     this.copy('watch', 'app/css/watch');
+//   }
+// };
+
+// InuitGenerator.prototype._updateFile = function _updateFile(hookName, filePath, content) {
+//   var hook = '/*===== yeoman ' + hookName + '=====*/',
+//     file = this.readFileAsString(filePath),
+//     insert = content;
+
+//     if (file.indexOf(insert) === -1) {
+//       this.write(path, file.replace(hook, insert + '\n' + hook));
+//     }
+// };
