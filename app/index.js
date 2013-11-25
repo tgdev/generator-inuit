@@ -49,7 +49,7 @@ InuitGenerator.prototype.askFor = function askFor() {
       type: 'confirm',
       name: 'useGrunt',
       message: 'Would you like to automate your workflow with Grunt?',
-      default: true
+      default: false
     }
   ];
 
@@ -75,6 +75,7 @@ InuitGenerator.prototype.app = function app() {
 
 InuitGenerator.prototype.projectfiles = function projectfiles() {
   this.bowerInstall('inuit.css', { save:true });
+  this.template('index.html', 'app/index.html');
   this.template('_vars.scss', 'app/css/_vars.scss');
   this.template('style.scss', 'app/css/style.scss');
   this.copy('editorconfig', '.editorconfig');
