@@ -1,6 +1,7 @@
+// Version format: MAJOR.MINOR.PATCH
 {
   "name": "<%= _.slugify(appname) %>",
-  "version": "0.1.0", // MAJOR.MINOR.PATCH
+  "version": "0.1.0",
   "dependencies": {},
   "devDependencies": {}
 }
