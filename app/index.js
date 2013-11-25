@@ -102,7 +102,7 @@ InuitGenerator.prototype.projectfiles = function projectfiles() {
 //     // loop through smacss files
 //     for(var i = 0; i < smacssFiles.length; i++) {
 //       // copy files over to project
-//       this.copy('smacss/_'+ smacssFiles[i] + '.scss', 'app/css/src/_' + filesToMove[i] + '.scss');
+//       this.copy('smacss/_'+ smacssFiles[i] + '.scss', 'app/css/src/_' + smacssFiles[i] + '.scss');
 //       // import files into main stylesheet
 //       insert += '@import "css/src/' + smacssFiles[i] + '"\n';
 //     }
