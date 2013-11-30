@@ -12,21 +12,27 @@ describe('inuit generator', function () {
         this.bowerInstallCalls = [];
 
         helpers.testDirectory(path.join(__dirname, 'temp'), function (err) {
+            
             if (err) {
                 return done(err);
             }
 
             this.app = helpers.createGenerator('inuit:app', [
-                '../../app'
+                '../../'
             ]);
 
             // Mock bower install and track the function calls.
             this.app.bowerInstall = function () {
-                this.bowerInstallCalls.push(arguments);
+                this.bowerInstallCalls['inuit.css'];
             }.bind(this);
             
             done();
         }.bind(this));
+    });
+
+    it('the generator can be required without throwing', function () {
+    // not testing the actual run of generators yet
+        this.app = require('../');
     });
 
     it('creates expected files', function (done) {
@@ -36,14 +42,12 @@ describe('inuit generator', function () {
             'bower.json',
             '.editorconfig',
             '.jshintrc',
-            'app/css/_vars.scss',
-            'app/css/style.scss'
+            'css/_vars.scss',
+            'css/style.scss'
         ];
 
         helpers.mockPrompt(this.app, {
-            // 'someOption': true
-            'setupSMACSS': false,
-            'useGrunt': false
+            'someOption': true
         });
 
         this.app.options['skip-install'] = true;
@@ -56,9 +60,7 @@ describe('inuit generator', function () {
 
     it('installs inuit.css bower package', function (done) {
         helpers.mockPrompt(this.app, {
-            // 'someOption': true
-            'setupSMACSS': false,
-            'useGrunt': false
+            'someOption': true
         });
     
         this.app.options['skip-install'] = true;
@@ -68,35 +70,4 @@ describe('inuit generator', function () {
             done();
         }.bind(this));
     });
-
-    // it('creates SMACSS files', function (done) {
-    //     var expected = [
-    //         'app/css/src/_1-base.scss',
-    //         'app/css/src/_2-layout.scss',
-    //         'app/css/src/_3-states.scss',
-    //         'app/css/src/_4-theme.scss'
-    //     ];
-
-    //     helpers.mockPrompt(this.app, {
-    //         'setupSMACSS': true,
-    //         'useGrunt': false
-    //     });
-
-    //     this.app.options['skip-install'] = true;
-
-    //     this.app.run({}, function () {
-    //         helpers.assertFiles(expected);
-    //         done();
-    //     });
-    // });
-
-    // it('adds gruntfile', function (done) {
-
-    //     helpers.mockPrompt(this.app, {
-    //         'useGrunt': true
-    //     });
-    //     this.app.run({}, function () {
-    //         helpers.hasFile('grunt.js');
-    //     });
-    // });
 });

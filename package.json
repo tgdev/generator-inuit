@@ -1,9 +1,10 @@
 {
   "name": "generator-inuit",
-  "version": "0.0.0",
-  "description": "A generator for Yeoman",
+  "version": "0.1.0",
+  "description": "A Yeoman generator for Harry Robert's inuit.css framework",
   "keywords": [
-    "yeoman-generator"
+    "yeoman-generator",
+    "inuit"
   ],
   "homepage": "https://github.com/tgdev/generator-inuit",
   "bugs": "https://github.com/tgdev/generator-inuit/issues",
