@@ -98,25 +98,31 @@ InuitGenerator.prototype.smacssFiles = function smacssFiles() {
       }
     }
 
-    console.log("SMCASS imports: ", insert);
-    console.log('SMACSS setup complete');
+    // console.log("SMCASS imports: ", insert);
+    // console.log('SMACSS setup complete');
     // import files into main stylesheet
-    // InuitGenerator.prototype._updateFile('style-hook', 'css/style.scss', insert);
+    InuitGenerator.prototype._updateFile('style-hook', 'css/style.scss', insert);
   }
 };
 
 InuitGenerator.prototype._updateFile = function _updateFile(hookName, filePath, content) {
-  var hook = '/*===== yeoman ' + hookName + '=====*/',
+  var hook = '/*===== yeoman ' + hookName + ' =====*/',
       file = this.readFileAsString(filePath),
       insert = content;
 
-    console.log('hook: ', hook);
-    console.log('file: ', file);
-    console.log('insert: ', insert);
+    // console.log('hookName: ', hookName);
+    // console.log('hook: ', hook);
 
-    // if (file.indexOf(insert) === -1) {
-    //   this.write(path, file.replace(hook, insert + '\n' + hook));
-    // }
+    // console.log('filePath: ', filePath);
+    // console.log('file: ', file);
+
+    // console.log('Content: ', content);
+    // console.log('insert: ', insert);
+
+    if (file.indexOf(insert) === -1) {
+      console.log('ready to add smacss imports to style.scss!!!');
+      // this.write(path, file.replace(hook, insert + '\n' + hook));
+    }
 };
 
  // var routeText = [
