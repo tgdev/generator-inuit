@@ -28,7 +28,7 @@ InuitGenerator.prototype.askFor = function askFor() {
     {
       type: 'confirm',
       name: 'setupSMACSS',
-      message: 'SMACSS helps structure your css into manageable modules. Would you like to include it?',
+      message: 'SMACSS helps structure your css into manageable modules. Would you like to include it? (This will prompt you to overwrite the style.scss file - choose yes)',
       default: false
     }
   ];
@@ -39,12 +39,6 @@ InuitGenerator.prototype.askFor = function askFor() {
 
     cb();
   }.bind(this));
-};
-
-InuitGenerator.prototype.getInuit = function getInuit() {
-  var cb = this.async();
-  this.bowerInstall('inuit.css', { save:true });
-  cb();
 };
 
 InuitGenerator.prototype.setupApp = function setupApp() {
@@ -84,7 +78,7 @@ InuitGenerator.prototype.smacssFiles = function smacssFiles() {
       '4-theme'
     ];
     
-    var insert = '';
+    var content = "";
 
     // loop through smacss files
     for(var i = 0; i < smacssFiles.length; i++) {
@@ -92,47 +86,47 @@ InuitGenerator.prototype.smacssFiles = function smacssFiles() {
       this.template('smacss/_'+ smacssFiles[i] + '.scss', 'css/src/_' + smacssFiles[i] + '.scss');
       // prepare content before updating style.scss
       if( (i + 1) === smacssFiles.length) {
-        insert += '@import "src/' + smacssFiles[i] + '"\n';
+        content += '@import "src/' + smacssFiles[i] + '"\n';
       } else {
-        insert += '@import "src/' + smacssFiles[i] + '",\n';
+        content += '@import "src/' + smacssFiles[i] + '"\n,';
       }
     }
 
-    // console.log("SMCASS imports: ", insert);
-    // console.log('SMACSS setup complete');
+    console.log(content);
+
     // import files into main stylesheet
-    InuitGenerator.prototype._updateFile('style-hook', 'css/style.scss', insert);
+    // InuitGenerator.prototype._updateFile('style-hook', 'css/style.scss', content);
+    var hook = '/*===== yeoman style-hook =====*/',
+        file = this.readFileAsString('css/style.scss'),
+        newContent = content + '\n' + hook;
+
+    if (file.indexOf(content) === -1) {
+      this.write('css/style.scss', file.replace(hook, newContent));
+    }
   }
 };
 
-InuitGenerator.prototype._updateFile = function _updateFile(hookName, filePath, content) {
-  var hook = '/*===== yeoman ' + hookName + ' =====*/',
-      file = this.readFileAsString(filePath),
-      insert = content;
-
-    // console.log('hookName: ', hookName);
-    // console.log('hook: ', hook);
-
-    // console.log('filePath: ', filePath);
-    // console.log('file: ', file);
-
-    // console.log('Content: ', content);
-    // console.log('insert: ', insert);
-
-    if (file.indexOf(insert) === -1) {
-      console.log('ready to add smacss imports to style.scss!!!');
-      // this.write(path, file.replace(hook, insert + '\n' + hook));
-    }
+InuitGenerator.prototype.getInuit = function getInuit() {
+  var cb = this.async();
+  this.bowerInstall('inuit.css', { save:true });
+  cb();
 };
 
- // var routeText = [
- //        "Flight::route('GET /crudPlural', array('crudSingle_Controller','all') ); ",
- //        "Flight::route('PUT /crudSingle', array('crudSingle_Controller','create') ); ",
- //        "Flight::route('GET /crudSingle/@id', array('crudSingle_Controller','findOne') ); ",
- //        "Flight::route('POST /crudSingle/@id', array('crudSingle_Controller','update') ); ",
- //        "Flight::route('DELETE /crudSingle/@id', array('crudSingle_Controller','delete') ); ",
- //        "//RouteInsertReference"
- //     ];
- //    var indexFile = this.readFileAsString('public/index.php');
- //    indexFile = indexFile.replace('//RouteInsertReference',routeText.join('\n'));
- //    this.write('public/index.php',indexFile);
+// InuitGenerator.prototype._updateFile = function _updateFile(hookName, filePath, content) {
+//   var hook = '/*===== yeoman ' + hookName + ' =====*/',
+//       file = this.readFileAsString(filePath),
+//       newContent = content + '\n' + hook;
+
+//   // console.log('hookName: ', hookName);
+//   console.log('filePath: ', filePath);
+//   // console.log('Content: ', content);
+  
+//   console.log('hook: ', hook);
+//   // console.log('file: ', file);
+//   console.log('New Content: ', newContent);
+  
+//   if (file.indexOf(content) === -1) {
+//     // console.log('ready to add smacss imports to style.scss!!!');
+//     // this.write(filePath, file.replace(hook, newContent));
+//   }
+// };
