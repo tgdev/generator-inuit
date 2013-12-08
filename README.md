@@ -19,8 +19,6 @@ Then, from your projects directory, initiate the generator:
 $ yo inuit
 ```
 
-Once you're up and running you'll need to
-
 ### Helpful articles from [CSS Wizardry](http://csswizardry.com)
 Below are 3 of the most helpful reference to understanding Inuit and OOCSS concepts to get the most out of inuit
 
