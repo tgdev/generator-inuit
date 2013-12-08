@@ -30,12 +30,19 @@ InuitGenerator.prototype.askFor = function askFor() {
       name: 'setupSMACSS',
       message: 'SMACSS helps structure your css into manageable modules. Would you like to include the SMACSS files?\n',
       default: false
+    },
+    {
+      type: 'confirm',
+      name: 'useGrunt',
+      message: 'Would you like to automate your workflow with Grunt?\n',
+      default: false
     }
   ];
 
   this.prompt(prompts, function (answers) {
     
     this.setupSMACSS = answers.setupSMACSS;
+    this.useGrunt = answers.useGrunt;
 
     cb();
 
@@ -82,5 +89,15 @@ InuitGenerator.prototype.smacssFiles = function smacssFiles() {
       // copy template files over to project
       this.template('smacss/_'+ smacssFiles[i] + '.scss', 'css/src/_' + smacssFiles[i] + '.scss');
     }
+  }
+};
+
+InuitGenerator.prototype.gruntTasks = function gruntTasks() {
+  if(this.useGrunt) {
+    // add gruntfile
+    this.template('Gruntfile.js', 'Gruntfile.js');
+  } else {
+    // provide Sass watch script to monitor changes to .scss files during dev
+    this.template('watch', 'css/watch');
   }
 };
