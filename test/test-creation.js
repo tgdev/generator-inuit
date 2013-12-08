@@ -47,7 +47,7 @@ describe('inuit generator', function () {
         ];
 
         helpers.mockPrompt(this.app, {
-            'someOption': true
+            'setupSMACSS': false
         });
 
         this.app.options['skip-install'] = true;
@@ -60,7 +60,7 @@ describe('inuit generator', function () {
 
     it('installs inuit.css bower package', function (done) {
         helpers.mockPrompt(this.app, {
-            'someOption': true
+            'setupSMACSS': false
         });
     
         this.app.options['skip-install'] = true;
@@ -70,4 +70,25 @@ describe('inuit generator', function () {
             done();
         }.bind(this));
     });
+
+    it('creates SMACSS files', function (done) {
+        var expected = [
+            'css/src/_1-base.scss',
+            'css/src/_2-layout.scss',
+            'css/src/_3-states.scss',
+            'css/src/_4-theme.scss'
+        ];
+
+        helpers.mockPrompt(this.app, {
+            'setupSMACSS': true
+        });
+
+        this.app.options['skip-install'] = true;
+
+        this.app.run({}, function () {
+            helpers.assertFiles(expected);
+            done();
+        });
+    });
+
 });
