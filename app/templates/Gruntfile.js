@@ -29,7 +29,7 @@ module.exports = function (grunt) {
 
         watch: {
             scripts: {
-                files: ['**/*.js'],
+                files: ['<%%= yeoman.app %>/js/**/*.js'],
                 tasks: ['jshint'],
                 options: {
                     spawn: false,
@@ -64,16 +64,6 @@ module.exports = function (grunt) {
                             lrSnippet,
                             mountFolder(connect, '.tmp'),
                             mountFolder(connect, yeomanConfig.app)
-                        ];
-                    }
-                }
-            },
-            test: {
-                options: {
-                    middleware: function (connect) {
-                        return [
-                            mountFolder(connect, '.tmp'),
-                            mountFolder(connect, 'test')
                         ];
                     }
                 }
@@ -113,7 +103,7 @@ module.exports = function (grunt) {
             },
             all: [
                 'Gruntfile.js',
-                '<%%= yeoman.app %>/js/{,*/}*.js',
+                '<%%= yeoman.app %>/js/**/*.js',
                 '!<%%= yeoman.app %>/js/vendor/*'
             ]
         },
@@ -138,69 +128,50 @@ module.exports = function (grunt) {
                 }
             }
         },
-        // Minify files - html & images
-        useminPrepare: {
-            options: {
-                dest: '<%%= yeoman.dist %>'
-            },
-            html: '<%%= yeoman.app %>/index.html'
-        },
-        usemin: {
-            options: {
-                dirs: ['<%%= yeoman.dist %>']
-            },
-            html: ['<%%= yeoman.dist %>/{,*/}*.html'],
-            css: ['<%%= yeoman.dist %>/css/{,*/}*.css']
-        },
+        // Minify assets - Images, Css & Js
         imagemin: {
-            dist: {
+            png: {
+                options: {
+                    optimizationLevel: 7
+                },
                 files: [{
                     expand: true,
-                    cwd: '<%%= yeoman.app %>/img',
-                    src: '{,*/}*.{png,jpg,jpeg}',
-                    dest: '<%%= yeoman.dist %>/img'
+                    cwd: '<%%= yeoman.app %>/img/',
+                    src: ['**/*.png'],
+                    dest: '<%%= yeoman.dist %>/img/',
+                    ext: '.png'
+                }]
+            },
+            jpg: {
+                options: {
+                    progressive: true
+                },
+                files: [{
+                    expand: true,
+                    cwd: '<%%= yeoman.app %>/img/',
+                    src: ['**/*.jpg'],
+                    dest: '<%%= yeoman.dist %>/img/',
+                    ext: '.jpg'
                 }]
             }
         },
         svgmin: {
-            dist: {
-                files: [{
-                    expand: true,
-                    cwd: '<%%= yeoman.app %>/img',
-                    src: '{,*/}*.svg',
-                    dest: '<%%= yeoman.dist %>/img'
-                }]
-            }
+    dist: {
+        files: [{
+            expand: true,
+            cwd: '<%%= yeoman.app %>/img',
+        src: '{,*/}*.svg',
+        dest: '<%%= yeoman.dist %>/img'
+    }]
+}
         },
         cssmin: {
-            dist: {
-                files: {
-                    '<%%= yeoman.dist %>/css/style.css': [
-                        '.tmp/css/{,*/}*.css',
-                        '<%%= yeoman.app %>/css/{,*/}*.css'
-                    ]
-                }
-            }
-        },
-        htmlmin: {
-            dist: {
-                options: {
-                    /*removeCommentsFromCDATA: true,
-                    // https://github.com/yeoman/grunt-usemin/issues/44
-                    //collapseWhitespace: true,
-                    collapseBooleanAttributes: true,
-                    removeAttributeQuotes: true,
-                    removeRedundantAttributes: true,
-                    useShortDoctype: true,
-                    removeEmptyAttributes: true,
-                    removeOptionalTags: true*/
-                },
-                files: [{
-                    expand: true,
-                    cwd: '<%%= yeoman.app %>',
-                    src: '*.html',
-                    dest: '<%%= yeoman.dist %>'
-                }]
+            minify: {
+                expand: true,
+                cwd: '<%%= yeoman.app %>/css/',
+                src: ['*.css', '!*.min.css'],
+                dest: '<%%= yeoman.dist %>/css/',
+                ext: '.min.css'
             }
         },
         // Put files not handled in other tasks here
@@ -217,26 +188,53 @@ module.exports = function (grunt) {
                         'img/{,*/}*.{webp,gif}',
                         'css/fonts/*'
                     ]
-                }, {
+                },
+                {
                     expand: true,
                     cwd: '.tmp/img',
                     dest: '<%%= yeoman.dist %>/img',
                     src: [
                         'generated/*'
                     ]
-                }
+                }]
             }
         },
+        // Run multiple grunt tasks at once
         concurrent: {
-            server: [
-                'compass:server'
-            ],
+            // server: [
+            //     'compass:server'
+            // ],
             dist: [
                 'compass:dist',
                 'imagemin',
                 'svgmin',
                 'htmlmin'
             ]
+        },
+        // concatenate all commonly used scripts into single js file
+        concat: {
+            options: {
+                separator: '\n\r'
+            },
+            files: {
+                src: [
+                    // List files here
+                    //'<%%= yeoman.app %>/js/example.js'
+                ],
+                dest: '.tmp/js/main.js',
+                nonull: true
+            }
+        },
+        // minify js
+        uglify: {
+            dist: {
+                options: {
+                    banner: '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> */\n'
+                },
+                files: {
+                    '<%%= yeoman.dist %>/js/main.min.js': ['.tmp/js/main.js']
+                }
+            }
         }
     });
 
@@ -247,7 +245,7 @@ module.exports = function (grunt) {
 
         grunt.task.run([
             'clean:server',
-            'concurrent:server',
+            'compass:server',
             'connect:livereload',
             'open:server',
             'watch'
@@ -256,17 +254,14 @@ module.exports = function (grunt) {
 
     grunt.registerTask('build', [
         'clean:dist',
-        'useminPrepare',
         'concurrent:dist',
-        'cssmin',
         'concat',
         'uglify',
-        'copy',
-        'usemin'
+        'copy'
     ]);
 
     grunt.registerTask('default', [
-        'jshint'
+        'jshint',
         'build'
     ]);
 };
