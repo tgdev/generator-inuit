@@ -15,7 +15,7 @@
  * Setup
  */
 @import "vars",
-		"/bower_components/inuit.css/inuit";
+		"../bower_components/inuit.css/inuit";
 
 <% if (setupSMACSS) { %>
 @import "src/1-base",
