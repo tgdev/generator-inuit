@@ -42,11 +42,19 @@ Files created are;
 These files are placed in the css/src directory and automatically imported into css/style.scss.
 
 Two more directories are added place your Sass partials into;
-1. css/src/modules
-3. css/src/plugins
+- css/src/modules
+- css/src/plugins
 
 For more info on SMACSS, visit [SMACSS website](http://smacss.com).
 
+### Grunt support
+[Grunt](http://gruntjs.com) helps automate your workflow.
+
+####Tasks
+
+grunt serve
+
+grunt build
 
 ## Yeoman Info
 
@@ -61,7 +69,10 @@ Find out more at [yeoman.io](http://yeoman.io)
 
 ## Changelog
 
+v0.3.0 - Grunt option/support
+
 v0.2.0 - SMACSS option/support
+
 v0.1.0 - Basic bowser install of inuit.css
 
 ## Roadmap
