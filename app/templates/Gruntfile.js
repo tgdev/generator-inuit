@@ -114,7 +114,7 @@ module.exports = function (grunt) {
                 generatedImagesDir: '.tmp/img/generated',
                 imagesDir: '<%%= yeoman.app %>/img',
                 javascriptsDir: '<%%= yeoman.app %>/scripts',
-                /*fontsDir: '<%%= yeoman.app %>/css/fonts',*/
+                fontsDir: '<%%= yeoman.app %>/css/fonts',
                 importPath: '<%%= yeoman.app %>/bower_components',
                 httpImagesPath: '/img',
                 httpGeneratedImagesPath: '/img/generated',
@@ -156,14 +156,14 @@ module.exports = function (grunt) {
             }
         },
         svgmin: {
-    dist: {
-        files: [{
-            expand: true,
-            cwd: '<%%= yeoman.app %>/img',
-        src: '{,*/}*.svg',
-        dest: '<%%= yeoman.dist %>/img'
-    }]
-}
+            dist: {
+                files: [{
+                    expand: true,
+                    cwd: '<%%= yeoman.app %>/img',
+                    src: '{,*/}*.svg',
+                    dest: '<%%= yeoman.dist %>/img'
+                }]
+            }
         },
         cssmin: {
             minify: {
@@ -201,14 +201,10 @@ module.exports = function (grunt) {
         },
         // Run multiple grunt tasks at once
         concurrent: {
-            // server: [
-            //     'compass:server'
-            // ],
             dist: [
                 'compass:dist',
                 'imagemin',
-                'svgmin',
-                'htmlmin'
+                'svgmin'
             ]
         },
         // concatenate all commonly used scripts into single js file
@@ -229,7 +225,7 @@ module.exports = function (grunt) {
         uglify: {
             dist: {
                 options: {
-                    banner: '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> */\n'
+                    banner: '/*! <%= pkg.name %> */\n'
                 },
                 files: {
                     '<%%= yeoman.dist %>/js/main.min.js': ['.tmp/js/main.js']

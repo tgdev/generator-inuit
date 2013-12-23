@@ -50,11 +50,32 @@ For more info on SMACSS, visit [SMACSS website](http://smacss.com).
 ### Grunt support
 [Grunt](http://gruntjs.com) helps automate your workflow.
 
+####Modules
+- open
+- connect
+- watch (w/ livereload)
+- clean
+- copy
+- concurrent
+- compass
+- imagemin
+- svgmin
+- cssmin
+- concat
+- uglify
+
 ####Tasks
 
-grunt serve
+**grunt server - used during development**
 
-grunt build
+Opens localhost server, prepares livereload and watches for changes
+
+**grunt build - used for generating production files**
+
+cleans up dist directory, concats and uglifies assets (img, css, js) and copies files ready for deployment
+
+*NOTE: Saying no to grunt option will generate a basic watch file to watch for Sass changes via the command line*
+
 
 ## Yeoman Info
 
@@ -77,11 +98,6 @@ v0.1.0 - Basic bowser install of inuit.css
 
 ## Roadmap
 I've only just started working on this and have a tonne of options and added extras/customisation I'm want to include such as;
-
-### Grunt support
-Choose from list of grunt task to generate custom package.json and grunt files. 
-
-Saying no to grunt will generate a basic watch file to watch for Sass changes via the command line
 
 ### Inuit Objects & Abstractions
 Choose which inuit objects/abstractions you want to use in your project. To skip this step, simply press enter as these can be configured manually once your project has been generated via the _vars.scss file.
