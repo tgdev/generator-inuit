@@ -103,6 +103,19 @@ Choose which inuit objects/abstractions you want to use in your project.
 
 To skip this step, simply press enter as these can be configured manually once your project has been generated via the _vars.scss file.
 
+### Sass module sub-generator
+
+```
+$ yo inuit:sassmod "module-name"
+```
+
+#### How it works
+- Creates partial sass file in css/src/modules/[module-name]
+- Adds @import "src/modules/[module-name]"; into style.scss
+
+*Note: you will be prompted by the sub-generator to overwrite style.scss with the new changes. Please choose yes and then enter.
+
+
 ## Yeoman Info
 
 ### What is Yeoman?
@@ -116,6 +129,8 @@ Find out more at [yeoman.io](http://yeoman.io)
 
 ## Changelog
 
+v0.5.0 - Create partial sass files with sub-generator
+
 v0.4.0 - Activate inuit modules
 
 v0.3.0 - Grunt option/support
@@ -124,8 +139,9 @@ v0.2.0 - SMACSS option/support
 
 v0.1.0 - Basic bowser install of inuit.css
 
-## Roadmap
-I've only just started working on this and have a tonne of options and added extras/customisation I'm want to include such as;
+## Thank yous
+Two people deserve a mention for helping me out with getting a couple of the features done in one way or another.
 
-### Sass module subgenerator
-Create new Sass modules from the command line and let the generator automatically create the file in 'app/css/src/modules' and add the @import statement to style.scss
+1. [Ritchie Anesco](https://github.com/ritchieanesco) for helping out with generating the inuit modules array for the _vars.scss file
+
+2. [Remy Bach](https://github.com/remybach) for [this article](http://remy.bach.me.uk/blog/2013/10/updating-existing-files-with-yeoman/) which enabled me to write content to the vars and style.scss files via a simple find hook and replace method.

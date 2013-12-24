@@ -1,6 +1,6 @@
 {
   "name": "generator-inuit",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "description": "A Yeoman generator for Harry Robert's inuit.css framework",
   "keywords": [
     "yeoman-generator",
@@ -14,6 +14,13 @@
     "email": "tomgillar@gmail.com",
     "url": "https://github.com/tgdev"
   },
+  "contributors": [
+    {
+      "name": "Ritchie Anesco",
+      "email": "info@ritchieanesco.com",
+      "web": "https://github.com/ritchieanesco" 
+    } 
+  ],
   "main": "app/index.js",
   "repository": {
     "type": "git",

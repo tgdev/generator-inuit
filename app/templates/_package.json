@@ -1,6 +1,6 @@
 {
   "name": "<%= _.slugify(appname) %>",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "dependencies": {},
   "devDependencies": {<% if (useGrunt) { %>
 		"grunt": "~0.4.1",
