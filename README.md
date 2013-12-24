@@ -20,15 +20,20 @@ $ yo inuit
 ```
 
 ### Helpful articles from [CSS Wizardry](http://csswizardry.com)
-Below are 3 of the most helpful reference to understanding Inuit and OOCSS concepts to get the most out of inuit
-
-[The open/closed principle applied to CSS](http://csswizardry.com/2012/06/the-open-closed-principle-applied-to-css/)
+Below are 3 of the most helpful references to understanding Inuit and OOCSS concepts.
 
 [MindBEMding – getting your head ’round BEM syntax](http://csswizardry.com/2013/01/mindbemding-getting-your-head-round-bem-syntax/)
+
+[The open/closed principle applied to CSS](http://csswizardry.com/2012/06/the-open-closed-principle-applied-to-css/)
 
 [The single responsibility principle applied to CSS](http://csswizardry.com/2012/04/the-single-responsibility-principle-applied-to-css/)
 
 ## Features
+
+### Inuit Objects & Abstractions
+Choose which inuit objects/abstractions you want to use in your project. 
+
+To skip this step, simply press enter as these can be configured manually once your project has been generated via the _vars.scss file.
 
 ### SMACSS support
 [Jonathan Snook's](http://snook.ca) SMACSS guide helps organise your site's CSS into flexible, maintainable chunks.
@@ -49,19 +54,6 @@ For more info on SMACSS, visit [SMACSS website](http://smacss.com).
 
 ### Grunt support
 [Grunt](http://gruntjs.com) helps automate your workflow.
-
-####Modules
-- open
-- connect (w/ livereload)
-- watch
-- clean
-- concurrent
-- copy
-- sass
-- imagemin
-- jshint
-- concat
-- uglify
 
 ####Tasks
 
@@ -97,12 +89,6 @@ There are way more things you can do with grunt like [Responsive Images](https:/
 
 *NOTE: Saying no to grunt option will generate a basic watch file to watch for Sass changes via the command line*
 
-
-### Inuit Objects & Abstractions
-Choose which inuit objects/abstractions you want to use in your project. 
-
-To skip this step, simply press enter as these can be configured manually once your project has been generated via the _vars.scss file.
-
 ### Sass module sub-generator
 
 ```
@@ -114,7 +100,6 @@ $ yo inuit:sassmod "module-name"
 - Adds @import "src/modules/[module-name]"; into style.scss
 
 *Note: you will be prompted by the sub-generator to overwrite style.scss with the new changes. Please choose yes and then enter.
-
 
 ## Yeoman Info
 
@@ -140,8 +125,8 @@ v0.2.0 - SMACSS option/support
 v0.1.0 - Basic bowser install of inuit.css
 
 ## Thank yous
-Two people deserve a mention for helping me out with getting a couple of the features done in one way or another.
+Two people deserve a mention for helping me get a couple of the features done in one way or another.
 
-1. [Ritchie Anesco](https://github.com/ritchieanesco) for helping out with generating the inuit modules array for the _vars.scss file
+1. [Ritchie Anesco](https://github.com/ritchieanesco) for helping out with the inuit objects & abstrations feature
 
-2. [Remy Bach](https://github.com/remybach) for [this article](http://remy.bach.me.uk/blog/2013/10/updating-existing-files-with-yeoman/) which enabled me to write content to the vars and style.scss files via a simple find hook and replace method.
+2. [Remy Bach](https://github.com/remybach) for [this article](http://remy.bach.me.uk/blog/2013/10/updating-existing-files-with-yeoman/) which enabled me to write content to the _vars.scss and style.scss files via a simple 'find hook and replace' solution.
