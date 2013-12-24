@@ -28,7 +28,13 @@ InuitGenerator.prototype.askFor = function askFor() {
     {
       type: 'confirm',
       name: 'setupSMACSS',
-      message: 'SMACSS helps structure your css into manageable modules. Would you like to include it?\n(This will prompt you to overwrite the style.scss file - choose yes)',
+      message: '\nSMACSS helps structure your css into manageable modules. Would you like to include the SMACSS files?\n',
+      default: false
+    },
+    {
+      type: 'confirm',
+      name: 'useGrunt',
+      message: '\nWould you like to automate your workflow with Grunt?\n',
       default: false
     }
   ];
@@ -36,6 +42,7 @@ InuitGenerator.prototype.askFor = function askFor() {
   this.prompt(prompts, function (answers) {
     
     this.setupSMACSS = answers.setupSMACSS;
+    this.useGrunt = answers.useGrunt;
 
     cb();
 
@@ -48,6 +55,7 @@ InuitGenerator.prototype.setupApp = function setupApp() {
   this.mkdir('css/src');
   this.mkdir('img');
   this.mkdir('js');
+  this.mkdir('js/vendors');
   this.mkdir('js/src');
   this.copy('_package.json', 'package.json');
   this.copy('_bower.json', 'bower.json');
@@ -55,14 +63,11 @@ InuitGenerator.prototype.setupApp = function setupApp() {
 };
 
 InuitGenerator.prototype.projectfiles = function projectfiles() {
-  var cb = this.async();
   this.template('_vars.scss', 'css/_vars.scss');
   this.template('style.scss', 'css/style.scss');
-  this.template('watch', 'css/watch');
   this.template('index.html', 'index.html');
   this.copy('editorconfig', '.editorconfig');
   this.copy('jshintrc', '.jshintrc');
-  cb();
 };
 
 InuitGenerator.prototype.smacssFiles = function smacssFiles() {
@@ -80,34 +85,20 @@ InuitGenerator.prototype.smacssFiles = function smacssFiles() {
       '4-theme'
     ];
     
-    var content = "";
-
     // loop through smacss files
     for(var i = 0; i < smacssFiles.length; i++) {
       // copy template files over to project
       this.template('smacss/_'+ smacssFiles[i] + '.scss', 'css/src/_' + smacssFiles[i] + '.scss');
-      // prepare content before updating style.scss
-      if( (i + 1) === smacssFiles.length) {
-        content += '@import "src/' + smacssFiles[i] + '"\n';
-      } else {
-        content += '@import "src/' + smacssFiles[i] + '",\n';
-      }
-    }
-    // console.log(content);
-
-    // import files into main stylesheet
-    var hook = '/*===== yeoman style-hook =====*/',
-        file = this.readFileAsString('css/style.scss'),
-        newContent = content + '\n' + hook;
-
-    if (file.indexOf(content) === -1) {
-      this.write('css/style.scss', file.replace(hook, newContent));
     }
   }
 };
 
-// InuitGenerator.prototype.getInuit = function getInuit() {
-//   var cb = this.async();
-//   this.bowerInstall('inuit.css', { save:true });
-//   cb();
-// };
+InuitGenerator.prototype.gruntSetup = function gruntSetup() {
+  if(this.useGrunt) {
+    // add gruntfile
+    this.template('Gruntfile.js', 'Gruntfile.js');
+  } else {
+    // provide Sass watch script to monitor changes to .scss files during dev
+    this.template('watch', 'css/watch');
+  }
+};

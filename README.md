@@ -42,10 +42,60 @@ Files created are;
 These files are placed in the css/src directory and automatically imported into css/style.scss.
 
 Two more directories are added place your Sass partials into;
-1. css/src/modules
-3. css/src/plugins
+- css/src/modules
+- css/src/plugins
 
 For more info on SMACSS, visit [SMACSS website](http://smacss.com).
+
+### Grunt support
+[Grunt](http://gruntjs.com) helps automate your workflow.
+
+####Modules
+- open
+- connect (w/ livereload)
+- watch
+- clean
+- concurrent
+- copy
+- sass
+- imagemin
+- jshint
+- concat
+- uglify
+
+####Tasks
+
+**Development**
+
+```
+grunt serve
+```
+
+- activates livereload
+- opens site in browser (http://localhost:9000)
+- watches files for changes
+
+```
+grunt watch
+```
+
+- watches for changes on all html files and assets (sass & js)
+
+**Production**
+
+```
+grunt build
+```
+
+- Generates minified site stylesheet
+- Optimises images
+- Concatinates and minifies js
+- Places all build assets (css, js & imgs) in dist directory
+- Copies all other build files (.ico, html & web fonts) to dist directory 
+
+There are way more things you can do with grunt like [Responsive Images](https://github.com/andismith/grunt-responsive-images), [HTML Partials](https://github.com/vanetix/grunt-includes), [Compass](https://github.com/gruntjs/grunt-contrib-compass), and [loads more](http://gruntjs.com/plugins), so feel free to add more to your gruntfile and package.json.
+
+*NOTE: Saying no to grunt option will generate a basic watch file to watch for Sass changes via the command line*
 
 
 ## Yeoman Info
@@ -61,16 +111,14 @@ Find out more at [yeoman.io](http://yeoman.io)
 
 ## Changelog
 
+v0.3.0 - Grunt option/support
+
 v0.2.0 - SMACSS option/support
+
 v0.1.0 - Basic bowser install of inuit.css
 
 ## Roadmap
 I've only just started working on this and have a tonne of options and added extras/customisation I'm want to include such as;
-
-### Grunt support
-Choose from list of grunt task to generate custom package.json and grunt files. 
-
-Saying no to grunt will generate a basic watch file to watch for Sass changes via the command line
 
 ### Inuit Objects & Abstractions
 Choose which inuit objects/abstractions you want to use in your project. To skip this step, simply press enter as these can be configured manually once your project has been generated via the _vars.scss file.
