@@ -14,14 +14,17 @@
 /**
  * Setup
  */
-@import "vars";
-@import "/bower_components/inuit.css/inuit";
+@import "vars",
+		"../bower_components/inuit.css/inuit";
 
-
+<% if (setupSMACSS) { %>
+@import "src/1-base",
+		"src/2-layout",
+		"src/3-states",
+		"src/4-theme"
+<% } %>
 /**
- * She’s all yours, cap’n... Begin importing your stuff here.
+ * She’s all yours, cap’n... Begin importing your stuff below.
  */
-//@import "ui/example";
-
-/*===== yeoman style-hook =====*/
-// NB! The above line is required for our yeoman generator and should not be changed.
+//@import "src/modules/example";
+//@import "src/plugins/example";
