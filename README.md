@@ -52,27 +52,46 @@ For more info on SMACSS, visit [SMACSS website](http://smacss.com).
 
 ####Modules
 - open
-- connect
-- watch (w/ livereload)
+- connect (w/ livereload)
+- watch
 - clean
-- copy
 - concurrent
-- compass
+- sass
 - imagemin
-- svgmin
-- cssmin
+- jshint
 - concat
 - uglify
 
 ####Tasks
 
-**grunt server - used during development**
+**Development**
 
-Opens localhost server, prepares livereload and watches for changes
+```
+grunt serve
+```
 
-**grunt build - used for generating production files**
+- activates livereload
+- opens site in browser (http://localhost:9000)
+- watches files for changes
 
-cleans up dist directory, concats and uglifies assets (img, css, js) and copies files ready for deployment
+```
+grunt watch
+```
+
+- watches for changes on all html files and assets (sass & js)
+
+**Production**
+
+```
+grunt build
+```
+
+- Generates minified site stylesheet
+- Optimises images
+- Concatinates and minifies js
+- Places all build assets (css, js & imgs) in dist directory
+
+There are way more things you can do with grunt like [Responsive Images](https://github.com/andismith/grunt-responsive-images), [HTML Partials](https://github.com/vanetix/grunt-includes), [Compass](https://github.com/gruntjs/grunt-contrib-compass), and [loads more](http://gruntjs.com/plugins), so feel free to add more to your gruntfile and package.json.
 
 *NOTE: Saying no to grunt option will generate a basic watch file to watch for Sass changes via the command line*
 

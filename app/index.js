@@ -22,19 +22,19 @@ InuitGenerator.prototype.askFor = function askFor() {
   // have Yeoman greet the user.
   console.log(this.yeoman);
   console.log('This will install the inuit css framework created by Harry Roberts with a few optional extras. For documentation and demos visit: http://inuitcss.com/');
-  console.log('*** NOTE: Inuit.css requires Sass 3.2 ***\n\n');
+  console.log('*** NOTE: Inuit.css requires Sass 3.2 ***\n');
 
   var prompts = [
     {
       type: 'confirm',
       name: 'setupSMACSS',
-      message: 'SMACSS helps structure your css into manageable modules. Would you like to include the SMACSS files?\n',
+      message: '\nSMACSS helps structure your css into manageable modules. Would you like to include the SMACSS files?\n',
       default: false
     },
     {
       type: 'confirm',
       name: 'useGrunt',
-      message: 'Would you like to automate your workflow with Grunt?\n',
+      message: '\nWould you like to automate your workflow with Grunt?\n',
       default: false
     }
   ];
@@ -92,7 +92,7 @@ InuitGenerator.prototype.smacssFiles = function smacssFiles() {
   }
 };
 
-InuitGenerator.prototype.gruntTasks = function gruntTasks() {
+InuitGenerator.prototype.gruntSetup = function gruntSetup() {
   if(this.useGrunt) {
     // add gruntfile
     this.template('Gruntfile.js', 'Gruntfile.js');
