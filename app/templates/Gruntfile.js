@@ -1,10 +1,5 @@
 // Generated on <%= (new Date).toISOString().split('T')[0] %> using <%= pkg.name %> <%= pkg.version %>
 'use strict';
-var LIVERELOAD_PORT = 35729;
-var lrSnippet = require('connect-livereload')({port: LIVERELOAD_PORT});
-var mountFolder = function (connect, dir) {
-    return connect.static(require('path').resolve(dir));
-};
 
 // # Globbing
 // for performance reasons we're only matching one level down:
@@ -21,7 +16,6 @@ module.exports = function (grunt) {
     // configurable paths
     var yeomanConfig = {
         app: '.',
-        temp: '.tmp',
         dist: 'dist'
     };
 
@@ -32,27 +26,23 @@ module.exports = function (grunt) {
         connect: {
             options: {
                 port: 9000,
+                livereload: 35729,
                 // change localhost to '0.0.0.0' to access the server from outside
                 hostname: 'localhost'
             },
             livereload: {
                 options: {
-                    middleware: function (connect) {
-                        return [
-                            lrSnippet,
-                            mountFolder(connect, yeoman.temp),
-                            mountFolder(connect, yeoman.app)
-                        ];
-                    }
+                    open: true,
+                    base: [
+                        '<%%= yeoman.app %>'
+                    ]
                 }
             },
             dist: {
                 options: {
-                    middleware: function (connect) {
-                        return [
-                            mountFolder(connect, yeoman.dist)
-                        ];
-                    }
+                    open: true,
+                    base: '<%%= yeoman.dist %>',
+                    livereload: false
                 }
             }
         },
@@ -77,7 +67,7 @@ module.exports = function (grunt) {
             },
             livereload: {
                 options: { livereload: true },
-                files: ['*.html', '<%%=yeoman.dist %>/**/*']
+                files: ['*.html', '<%%=yeoman.app %>/js/**/*.js', '<%%=yeoman.app %>/css/**/*.scss']
             },
         },
 
@@ -90,7 +80,7 @@ module.exports = function (grunt) {
                 },
                 files: {
                     // 'destination': 'source'
-                    '<%%= yeoman.dist %>/css/style.debug.css': '<%%= yeoman.app %>/css/style.scss'
+                    '<%%= yeoman.app %>/css/style.debug.css': '<%%= yeoman.app %>/css/style.scss'
                 }
             },
             dist: {
@@ -101,7 +91,7 @@ module.exports = function (grunt) {
                 },
                 files: {
                     // 'destination': 'source'
-                    '<%%= yeoman.dist %>/css/style.min.css': '<%%= yeoman.app %>/css/style.scss'
+                    '<%%= yeoman.app %>/css/style.min.css': '<%%= yeoman.app %>/css/style.scss'
                 }
             }
         },
@@ -190,6 +180,31 @@ module.exports = function (grunt) {
                 'imagemin',
                 'jshint'
             ]
+        },
+
+        // Copies remaining files to places other tasks can use
+        copy: {
+            dist: {
+                files: [{
+                    expand: true,
+                    dot: true,
+                    cwd: '<%%= yeoman.app %>',
+                    dest: '<%%= yeoman.dist %>',
+                    src: [
+                        '{,*/}*.html',
+                        'css/fonts/{,*/}*.*'//,
+                        // '*.{ico,png,txt}',
+                        // '.htaccess',
+                    ]
+                }]
+            },
+            styles: {
+                expand: true,
+                dot: true,
+                cwd: '<%%= yeoman.app %>/css',
+                dest: '<%%= yeoman.dist %>/css/',
+                src: '{,*/}*.css'
+            }
         }
 
     });
@@ -200,17 +215,24 @@ module.exports = function (grunt) {
         }
 
         grunt.task.run([
+            'sass',
             'connect:livereload',
             'open:server',
             'watch'
         ]);
     });
 
+    grunt.registerTask('server', function () {
+        grunt.log.warn('The `server` task has been deprecated. Use `grunt serve` to start a server.');
+        grunt.task.run(['serve']);
+    });
+
     grunt.registerTask('build', [
         'clean:dist',
         'concurrent:dist',
         'concat',
-        'uglify'
+        'uglify',
+        'copy:dist'
     ]);
 
     grunt.registerTask('default', ['build']);

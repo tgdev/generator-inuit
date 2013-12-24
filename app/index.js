@@ -55,6 +55,7 @@ InuitGenerator.prototype.setupApp = function setupApp() {
   this.mkdir('css/src');
   this.mkdir('img');
   this.mkdir('js');
+  this.mkdir('js/vendors');
   this.mkdir('js/src');
   this.copy('_package.json', 'package.json');
   this.copy('_bower.json', 'bower.json');

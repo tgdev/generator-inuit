@@ -56,6 +56,7 @@ For more info on SMACSS, visit [SMACSS website](http://smacss.com).
 - watch
 - clean
 - concurrent
+- copy
 - sass
 - imagemin
 - jshint
@@ -90,6 +91,7 @@ grunt build
 - Optimises images
 - Concatinates and minifies js
 - Places all build assets (css, js & imgs) in dist directory
+- Copies all other build files (.ico, html & web fonts) to dist directory 
 
 There are way more things you can do with grunt like [Responsive Images](https://github.com/andismith/grunt-responsive-images), [HTML Partials](https://github.com/vanetix/grunt-includes), [Compass](https://github.com/gruntjs/grunt-contrib-compass), and [loads more](http://gruntjs.com/plugins), so feel free to add more to your gruntfile and package.json.
 
