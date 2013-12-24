@@ -24,13 +24,13 @@ InuitGenerator.prototype.askFor = function askFor() {
   // have Yeoman greet the user.
   console.log(this.yeoman);
   console.log('This will install the inuit css framework created by Harry Roberts with a few optional extras. For documentation and demos visit: http://inuitcss.com/');
-  console.log('*** NOTE: Inuit.css requires Sass 3.2 ***\n');
+  console.log('*** NOTE: Inuit.css requires Sass 3.2 ***\n\n');
 
   var prompts = [
     {
       type: 'checkbox',
       name: 'modules',
-      message: '\nWhich inuit modules would you like to use?\n',
+      message: 'Which inuit modules would you like to use?\n',
       choices: [
         {
           name: 'grids'
@@ -165,6 +165,9 @@ InuitGenerator.prototype.modifyVarsFile = function modifyVarsFile() {
       str = '',
       hook = '/*===== yeoman modules-hook =====*/\n// NB! The above line is required for our yeoman generator and should not be changed or removed.';
 
+  console.log('selected mods:\n', selectedModules);
+  console.log('hook:\n', hook);
+
   //check if modules have been chosen
   if(selectedModules.length > 0) {
 
@@ -193,8 +196,12 @@ InuitGenerator.prototype.modifyVarsFile = function modifyVarsFile() {
   // add new line for better readability
   var output = content.join('\n');
 
+  console.log('final output:\n', output);
+
   // replace yeoman hook with modules and their boolean values
   this.varsFile = this.varsFile.replace(hook, output);
+
+  console.log('updated varsFile:\n', this.varsFile);
 
 };
 
@@ -244,6 +251,7 @@ InuitGenerator.prototype.setupApp = function setupApp() {
   // copy files
   this.copy('_package.json', 'package.json');
   this.copy('_bower.json', 'bower.json');
+  this.copy('_gitignore', '.gitignore');
 
 };
 
