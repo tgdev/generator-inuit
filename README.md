@@ -98,6 +98,11 @@ There are way more things you can do with grunt like [Responsive Images](https:/
 *NOTE: Saying no to grunt option will generate a basic watch file to watch for Sass changes via the command line*
 
 
+### Inuit Objects & Abstractions
+Choose which inuit objects/abstractions you want to use in your project. 
+
+To skip this step, simply press enter as these can be configured manually once your project has been generated via the _vars.scss file.
+
 ## Yeoman Info
 
 ### What is Yeoman?
@@ -111,6 +116,8 @@ Find out more at [yeoman.io](http://yeoman.io)
 
 ## Changelog
 
+v0.4.0 - Activate inuit modules
+
 v0.3.0 - Grunt option/support
 
 v0.2.0 - SMACSS option/support
@@ -119,9 +126,6 @@ v0.1.0 - Basic bowser install of inuit.css
 
 ## Roadmap
 I've only just started working on this and have a tonne of options and added extras/customisation I'm want to include such as;
-
-### Inuit Objects & Abstractions
-Choose which inuit objects/abstractions you want to use in your project. To skip this step, simply press enter as these can be configured manually once your project has been generated via the _vars.scss file.
 
 ### Sass module subgenerator
 Create new Sass modules from the command line and let the generator automatically create the file in 'app/css/src/modules' and add the @import statement to style.scss
