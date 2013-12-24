@@ -122,87 +122,13 @@ InuitGenerator.prototype.askFor = function askFor() {
 
   this.prompt(prompts, function (answers) {
     
-    this.modules = answers.modules;
     this.setupSMACSS = answers.setupSMACSS;
     this.useGrunt = answers.useGrunt;
+    this.modules = answers.modules;
 
     cb();
 
   }.bind(this));
-};
-
-InuitGenerator.prototype.modifyVarsFile = function modifyVarsFile() {
-
-  // All inuit Modules
-  var availableModules = [
-    'grids',
-    'flexbox',
-    'columns',
-    'nav',
-    'options',
-    'pagination',
-    'breadcrumb',
-    'media',
-    'marginalia',
-    'island',
-    'block-list',
-    'matrix',
-    'split',
-    'this-or-this',
-    'link-complex',
-    'flyout',
-    'arrows',
-    'sprite',
-    'icon-text',
-    'beautons',
-    'lozenges',
-    'rules',
-    'stats',
-    'greybox'
-  ],
-      selectedModules = this.modules,
-      content = [],
-      str = '',
-      hook = '/*===== yeoman modules-hook =====*/\n// NB! The above line is required for our yeoman generator and should not be changed or removed.';
-
-  console.log('selected mods:\n', selectedModules);
-  console.log('hook:\n', hook);
-
-  //check if modules have been chosen
-  if(selectedModules.length > 0) {
-
-    // loop through all inuit modules
-    for (var i = 0; i < availableModules.length; i++) {
-      //check selectedModules array against availableModules for a match
-      if( selectedModules.indexOf( availableModules[i] ) > -1 ) {
-        // if there is a match, set module to true - user will use this module in their project
-        str = '$use-' + availableModules[i] +': true;';    
-      } else {
-        // otherwise, set module to false - user will NOT use this module in their project
-        str = '$use-' + availableModules[i] +': false;';      
-      }      
-      content.push(str);
-    }
-
-  } else {
-    // loop through all inuit modules
-    for(var k = 0; k < availableModules.length; k++) {    
-      // set module to false - user will NOT use this module in their project
-      str = '$use-' + availableModules[k] + ': false;';
-      content.push(str);    
-    }  
-  }
-
-  // add new line for better readability
-  var output = content.join('\n');
-
-  console.log('final output:\n', output);
-
-  // replace yeoman hook with modules and their boolean values
-  this.varsFile = this.varsFile.replace(hook, output);
-
-  console.log('updated varsFile:\n', this.varsFile);
-
 };
 
 InuitGenerator.prototype.smacssFiles = function smacssFiles() {
@@ -238,6 +164,73 @@ InuitGenerator.prototype.gruntSetup = function gruntSetup() {
   }
 };
 
+InuitGenerator.prototype.modifyVarsFile = function modifyVarsFile() {
+
+  // All inuit Modules
+  var availableModules = [
+    'grids',
+    'flexbox',
+    'columns',
+    'nav',
+    'options',
+    'pagination',
+    'breadcrumb',
+    'media',
+    'marginalia',
+    'island',
+    'block-list',
+    'matrix',
+    'split',
+    'this-or-this',
+    'link-complex',
+    'flyout',
+    'arrows',
+    'sprite',
+    'icon-text',
+    'beautons',
+    'lozenges',
+    'rules',
+    'stats',
+    'greybox'
+  ],
+      selectedModules = this.modules,
+      content = [],
+      str = '',
+      hook = '/*===== yeoman modules-hook do-not-remove =====*/';
+
+  //check if modules have been chosen
+  if(selectedModules.length > 0) {
+
+    // loop through all inuit modules
+    for (var i = 0; i < availableModules.length; i++) {
+      //check selectedModules array against availableModules for a match
+      if( selectedModules.indexOf( availableModules[i] ) > -1 ) {
+        // if there is a match, set module to true - user will use this module in their project
+        str = '$use-' + availableModules[i] +': true;';    
+      } else {
+        // otherwise, set module to false - user will NOT use this module in their project
+        str = '$use-' + availableModules[i] +': false;';      
+      }      
+      content.push(str);
+    }
+
+  } else {
+    // loop through all inuit modules
+    for(var k = 0; k < availableModules.length; k++) {    
+      // set module to false - user will NOT use this module in their project
+      str = '$use-' + availableModules[k] + ': false;';
+      content.push(str);    
+    }  
+  }
+
+  // add new line for better readability
+  var output = content.join('\n');
+
+  // replace yeoman hook with modules and their boolean values
+  this.varsFile = this.varsFile.replace(hook, output);
+
+};
+
 InuitGenerator.prototype.setupApp = function setupApp() {
 
   //scaffold assets dir structure
@@ -252,15 +245,12 @@ InuitGenerator.prototype.setupApp = function setupApp() {
   this.copy('_package.json', 'package.json');
   this.copy('_bower.json', 'bower.json');
   this.copy('_gitignore', '.gitignore');
-
 };
 
 InuitGenerator.prototype.projectfiles = function projectfiles() {
-
   this.write('css/_vars.scss', this.varsFile); // add modules from modifyVarsFile()
   this.template('style.scss', 'css/style.scss');
   this.template('index.html', 'index.html');
   this.copy('editorconfig', '.editorconfig');
   this.copy('jshintrc', '.jshintrc');
-
 };
