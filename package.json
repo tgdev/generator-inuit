@@ -5,7 +5,13 @@
   "keywords": [
     "yeoman-generator",
     "inuit",
-    "oocss"
+    "front-end",
+    "oocss",
+    "web"
+    "css",
+    "framework",
+    "grunt",
+    "SMACSS"
   ],
   "homepage": "https://github.com/tgdev/generator-inuit",
   "bugs": "https://github.com/tgdev/generator-inuit/issues",
