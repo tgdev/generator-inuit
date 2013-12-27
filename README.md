@@ -1,7 +1,9 @@
 # generator-inuit
 
-A [Yeoman](http://yeoman.io) generator for Harry Robert's [inuit](http://inuitcss.com) css framework.
+![inuit css](http://inuitcss.com/img/content/logo.png)
+![yeoman](http://yeoman.io/assets/img/yeoman-logo.png)
 
+A [Yeoman](http://yeoman.io) generator for Harry Robert's [inuit](http://inuitcss.com) css framework.
 
 ## Getting Started
 
@@ -10,13 +12,13 @@ A [Yeoman](http://yeoman.io) generator for Harry Robert's [inuit](http://inuitcs
 To install generator-inuit from npm, run:
 
 ```
-$ npm install -g generator-inuit
+npm install -g generator-inuit
 ```
 
 Then, from your projects directory, initiate the generator:
 
 ```
-$ yo inuit
+yo inuit
 ```
 
 ### Helpful articles from [CSS Wizardry](http://csswizardry.com)
@@ -92,14 +94,14 @@ There are way more things you can do with grunt like [Responsive Images](https:/
 ### Sass module sub-generator
 
 ```
-$ yo inuit:sassmod "module-name"
+yo inuit:sassmod "module-name"
 ```
 
 #### How it works
-- Creates partial sass file in css/src/modules/[module-name]
+- Creates partial sass file in css/src/modules/_[module-name].scss
 - Adds @import "src/modules/[module-name]"; into style.scss
 
-*Note: you will be prompted by the sub-generator to overwrite style.scss with the new changes. Please choose yes and then enter.
+*Note: you will be prompted by the sub-generator to overwrite style.scss with the new changes. Please choose yes and then enter.*
 
 ## Yeoman Info
 
