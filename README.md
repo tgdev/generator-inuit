@@ -1,8 +1,5 @@
 # generator-inuit
 
-![inuit css](http://inuitcss.com/img/content/logo.png)
-![yeoman](http://yeoman.io/assets/img/yeoman-logo.png)
-
 A [Yeoman](http://yeoman.io) generator for Harry Robert's [inuit](http://inuitcss.com) css framework.
 
 ## Getting Started
