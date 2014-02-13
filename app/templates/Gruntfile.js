@@ -1,6 +1,12 @@
 // Generated on <%= (new Date).toISOString().split('T')[0] %> using <%= pkg.name %> <%= pkg.version %>
 'use strict';
 
+var LIVERELOAD_PORT = 35729;
+var lrSnippet = require('connect-livereload')({port: LIVERELOAD_PORT});
+var mountFolder = function (connect, dir) {
+    return connect.static(require('path').resolve(dir));
+};
+
 // # Globbing
 // for performance reasons we're only matching one level down:
 // 'test/spec/{,*/}*.js'
@@ -30,12 +36,14 @@ module.exports = function (grunt) {
                 // change localhost to '0.0.0.0' to access the server from outside
                 hostname: 'localhost'
             },
-            livereload: {
+            dev: {
                 options: {
-                    open: true,
-                    base: [
-                        '<%%= yeoman.app %>'
-                    ]
+                    middleware: function (connect) {
+                        return [
+                            lrSnippet,
+                            mountFolder(connect, yeomanConfig.app)
+                        ];
+                    }
                 }
             },
             dist: {
@@ -216,7 +224,7 @@ module.exports = function (grunt) {
 
         grunt.task.run([
             'sass',
-            'connect:livereload',
+            'connect:dev',
             'open:server',
             'watch'
         ]);
