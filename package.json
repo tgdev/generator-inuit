@@ -1,7 +1,7 @@
 {
   "name": "generator-inuit",
-  "version": "0.5.0",
-  "description": "A Yeoman generator for Harry Robert's inuit.css framework",
+  "version": "0.5.2",
+  "description": "A Yeoman generator for Harry Robert's inuit.css framework with SMACSS and grunt support",
   "keywords": [
     "yeoman-generator",
     "inuit",
@@ -18,7 +18,7 @@
   "author": {
     "name": "Tom Gillard",
     "email": "tomgillar@gmail.com",
-    "url": "https://github.com/tgdev"
+    "url": "http://tomgillard.com"
   },
   "contributors": [
     {
