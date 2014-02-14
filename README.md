@@ -113,6 +113,8 @@ Find out more at [yeoman.io](http://yeoman.io)
 
 ## Changelog
 
+v0.5.2 - Fixed livereload issue and upgraded imagemin grunt package
+
 v0.5.0 - Create partial sass files with sub-generator
 
 v0.4.0 - Activate inuit modules
