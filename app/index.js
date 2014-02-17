@@ -135,8 +135,8 @@ InuitGenerator.prototype.smacssFiles = function smacssFiles() {
   if(this.setupSMACSS) {
 
     // add extra directories
-    this.mkdir('css/src/modules');
-    this.mkdir('css/src/plugins');
+    this.mkdir('app/css/src/modules');
+    this.mkdir('app/css/src/plugins');
 
     // store smacss files in an array
     var smacssFiles = [
@@ -149,7 +149,7 @@ InuitGenerator.prototype.smacssFiles = function smacssFiles() {
     // loop through smacss files
     for(var i = 0; i < smacssFiles.length; i++) {
       // copy template files over to project
-      this.template('smacss/_'+ smacssFiles[i] + '.scss', 'css/src/_' + smacssFiles[i] + '.scss');
+      this.template('smacss/_'+ smacssFiles[i] + '.scss', 'app/css/src/_' + smacssFiles[i] + '.scss');
     }
   }
 };
@@ -160,7 +160,7 @@ InuitGenerator.prototype.gruntSetup = function gruntSetup() {
     this.template('Gruntfile.js', 'Gruntfile.js');
   } else {
     // provide Sass watch script to monitor changes to .scss files during dev
-    this.template('watch', 'css/watch');
+    this.template('watch', 'app/css/watch');
   }
 };
 
@@ -234,23 +234,26 @@ InuitGenerator.prototype.modifyVarsFile = function modifyVarsFile() {
 InuitGenerator.prototype.setupApp = function setupApp() {
 
   //scaffold assets dir structure
-  this.mkdir('css');
-  this.mkdir('css/src');
-  this.mkdir('img');
-  this.mkdir('js');
-  this.mkdir('js/vendors');
-  this.mkdir('js/src');
+  this.mkdir('app/css');
+  this.mkdir('app/css/src');
+  this.mkdir('app/img');
+  this.mkdir('app/js');
+  this.mkdir('app/js/vendors');
+  this.mkdir('app/js/plugins');
+  this.mkdir('app/js/src');
 
   // copy files
   this.copy('_package.json', 'package.json');
   this.copy('_bower.json', 'bower.json');
   this.copy('_gitignore', '.gitignore');
+  this.copy('editorconfig', '.editorconfig');
+  this.copy('jshintrc', '.jshintrc');
 };
 
 InuitGenerator.prototype.projectfiles = function projectfiles() {
-  this.write('css/_vars.scss', this.varsFile); // add modules from modifyVarsFile()
-  this.template('style.scss', 'css/style.scss');
-  this.template('index.html', 'index.html');
-  this.copy('editorconfig', '.editorconfig');
-  this.copy('jshintrc', '.jshintrc');
+  this.write('app/css/_vars.scss', this.varsFile); // add modules from modifyVarsFile()
+  this.template('style.scss', 'app/css/style.scss');
+  this.template('index.html', 'app/index.html');
+  this.copy('plugins.js', 'app/js/src/plugins.js');
+  this.copy('main.js', 'app/js/src/main.js');
 };

@@ -113,6 +113,8 @@ Find out more at [yeoman.io](http://yeoman.io)
 
 ## Changelog
 
+v0.6.0 - Restructured scaffolding to separate files into app and dist. Added additional grunt tasks (autoprefixer, cssmin and rigger)
+
 v0.5.2 - Fixed livereload issue and upgraded imagemin grunt package
 
 v0.5.0 - Create partial sass files with sub-generator
