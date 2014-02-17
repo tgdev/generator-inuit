@@ -66,7 +66,7 @@ module.exports = function (grunt) {
             },
             scripts: {
                 files: ['<%%=yeoman.app %>/js/**/*.js'],
-                tasks: ['jshint:main', 'rig', 'concat'],
+                tasks: ['jshint:main', 'concat'],
                 options: {
                     spawn: false
                 },
@@ -261,7 +261,6 @@ module.exports = function (grunt) {
     grunt.registerTask('build', [
         'clean',
         'concurrent:dist',
-        'rig',
         'concat',
         'uglify'
     ]);
