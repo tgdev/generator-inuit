@@ -31,11 +31,10 @@ module.exports = function (grunt) {
         connect: {
             options: {
                 port: 9000,
-                livereload: 35729,
                 // change localhost to '0.0.0.0' to access the server from outside
                 hostname: 'localhost'
             },
-            dev: {
+            livereload: {
                 options: {
                     middleware: function (connect) {
                         return [
@@ -47,9 +46,11 @@ module.exports = function (grunt) {
             },
             dist: {
                 options: {
-                    open: true,
-                    base: '<%%= yeoman.dist %>',
-                    livereload: false
+                    middleware: function (connect) {
+                        return [
+                            mountFolder(connect, yeomanConfig.dist)
+                        ];
+                    }
                 }
             }
         },
@@ -66,19 +67,23 @@ module.exports = function (grunt) {
             },
             scripts: {
                 files: ['<%%=yeoman.app %>/js/**/*.js'],
-                tasks: ['jshint:main', 'concat'],
-                options: {
-                    spawn: false
-                },
+                tasks: ['jshint', 'concat']
             },
             livereload: {
-                options: { livereload: true },
-                files: ['<%%=yeoman.app %>/*.html', '<%%=yeoman.app %>/js/**/*.js', '<%%=yeoman.app %>/css/**/*.scss']
-            },
+                options: {
+                    livereload: LIVERELOAD_PORT
+                },
+                files: [
+                    '<%%=yeoman.app %>/{,*/}*.html',
+                    '<%%=yeoman.app %>/css/{,*/}*.css',
+                    '<%%=yeoman.app %>/js/{,*/}*.js',
+                    '<%%=yeoman.app %>/img/{,*/}*.{png,jpg,jpeg,gif}'
+                ]
+            }
         },
         // Sass options
         sass: {
-            dev: {
+            dist: {
                 options: {
                     style: 'expanded',
                     debugInfo: false,
@@ -158,7 +163,7 @@ module.exports = function (grunt) {
             options: {
                 jshintrc: '.jshintrc'
             },
-            main: [
+            src: [
                 '<%%= yeoman.app %>/js/src/*.js'
             ]
         },
@@ -247,7 +252,8 @@ module.exports = function (grunt) {
         grunt.task.run([
             'concurrent:serve',
             'autoprefixer',
-            'connect:dev',
+            'concat',
+            'connect:livereload',
             'open:server',
             'watch'
         ]);
