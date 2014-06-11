@@ -113,6 +113,8 @@ Find out more at [yeoman.io](http://yeoman.io)
 
 ## Changelog
 
+v0.6.4 - Fixed error in gruntfile
+
 v0.6.3 - Added missing grunt tasks to grunt build
 
 v0.6.0 - Restructured scaffolding to separate files into app and dist. Added additional grunt tasks (autoprefixer, cssmin and rigger)
