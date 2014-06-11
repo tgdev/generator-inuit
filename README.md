@@ -30,7 +30,7 @@ Below are 3 of the most helpful references to understanding Inuit and OOCSS conc
 ## Features
 
 ### Inuit Objects & Abstractions
-Choose which inuit objects/abstractions you want to use in your project. 
+Choose which inuit objects/abstractions you want to use in your project.
 
 To skip this step, simply press enter as these can be configured manually once your project has been generated via the _vars.scss file.
 
@@ -82,7 +82,7 @@ grunt build
 - Optimises images
 - Concatinates and minifies js
 - Places all build assets (css, js & imgs) in dist directory
-- Copies all other build files (.ico, html & web fonts) to dist directory 
+- Copies all other build files (.ico, html & web fonts) to dist directory
 
 There are way more things you can do with grunt like [Responsive Images](https://github.com/andismith/grunt-responsive-images), [HTML Partials](https://github.com/vanetix/grunt-includes), [Compass](https://github.com/gruntjs/grunt-contrib-compass), and [loads more](http://gruntjs.com/plugins), so feel free to add more to your gruntfile and package.json.
 
@@ -112,6 +112,8 @@ Find out more at [yeoman.io](http://yeoman.io)
 [MIT License](http://en.wikipedia.org/wiki/MIT_License)
 
 ## Changelog
+
+v0.6.3 - Added missing grunt tasks to grunt build
 
 v0.6.0 - Restructured scaffolding to separate files into app and dist. Added additional grunt tasks (autoprefixer, cssmin and rigger)
 

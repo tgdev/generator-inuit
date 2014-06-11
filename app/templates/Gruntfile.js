@@ -213,13 +213,13 @@ module.exports = function (grunt) {
         // Run multiple grunt tasks at once
         concurrent: {
             serve: [
-                'sass',
-                'jshint'
+                'jshint',
+                'sass'
             ],
             dist: [
+                'jshint',
                 'sass',
                 'imagemin',
-                'jshint',
                 'copy'
             ]
         },
@@ -267,6 +267,8 @@ module.exports = function (grunt) {
     grunt.registerTask('build', [
         'clean',
         'concurrent:dist',
+        'autoprefixer',
+        'cssmin',
         'concat',
         'uglify'
     ]);
