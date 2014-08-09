@@ -1,6 +1,6 @@
 {
   "name": "<%= _.slugify(appname) %>",
-  "version": "0.6.4",
+  "version": "0.6.5",
   "dependencies": {},
   "devDependencies": {<% if (useGrunt) { %>
 		"grunt": "~0.4.1",
@@ -13,7 +13,7 @@
 	    "grunt-concurrent": "~0.1.0",
 	    "grunt-contrib-copy": "~0.4.1",
 	    "grunt-contrib-watch": "~0.4.0",
-	    "grunt-contrib-sass": "latest",
+	    "grunt-contrib-sass": "~0.7.0",
 	    "grunt-autoprefixer": "~0.6.4",
     	"grunt-contrib-cssmin": "~0.7.0",
 	    "grunt-contrib-imagemin": "~0.4.0",

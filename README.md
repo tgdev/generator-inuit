@@ -2,6 +2,8 @@
 
 A [Yeoman](http://yeoman.io) generator for Harry Robert's [inuit](http://inuitcss.com) css framework.
 
+**NOTE: Requires Sass 3.3**
+
 ## Getting Started
 
 ### Installing and running the inuit generator
@@ -112,6 +114,8 @@ Find out more at [yeoman.io](http://yeoman.io)
 [MIT License](http://en.wikipedia.org/wiki/MIT_License)
 
 ## Changelog
+
+v0.6.5 - Found dependency in quotes sass module using !global (Sass 3.3)
 
 v0.6.4 - Fixed error in gruntfile
 

@@ -24,7 +24,7 @@ InuitGenerator.prototype.askFor = function askFor() {
   // have Yeoman greet the user.
   console.log(this.yeoman);
   console.log('This will install the inuit css framework created by Harry Roberts with a few optional extras. For documentation and demos visit: http://inuitcss.com/');
-  console.log('*** NOTE: Inuit.css requires Sass 3.2 ***\n\n');
+  console.log('*** NOTE: Inuit.css requires Sass 3.3 ***\n\n');
 
   var prompts = [
     {
@@ -121,7 +121,7 @@ InuitGenerator.prototype.askFor = function askFor() {
   ];
 
   this.prompt(prompts, function (answers) {
-    
+
     this.setupSMACSS = answers.setupSMACSS;
     this.useGrunt = answers.useGrunt;
     this.modules = answers.modules;
@@ -145,7 +145,7 @@ InuitGenerator.prototype.smacssFiles = function smacssFiles() {
       '3-states',
       '4-theme'
     ];
-    
+
     // loop through smacss files
     for(var i = 0; i < smacssFiles.length; i++) {
       // copy template files over to project
@@ -206,21 +206,21 @@ InuitGenerator.prototype.modifyVarsFile = function modifyVarsFile() {
       //check selectedModules array against availableModules for a match
       if( selectedModules.indexOf( availableModules[i] ) > -1 ) {
         // if there is a match, set module to true - user will use this module in their project
-        str = '$use-' + availableModules[i] +': true;';    
+        str = '$use-' + availableModules[i] +': true;';
       } else {
         // otherwise, set module to false - user will NOT use this module in their project
-        str = '$use-' + availableModules[i] +': false;';      
-      }      
+        str = '$use-' + availableModules[i] +': false;';
+      }
       content.push(str);
     }
 
   } else {
     // loop through all inuit modules
-    for(var k = 0; k < availableModules.length; k++) {    
+    for(var k = 0; k < availableModules.length; k++) {
       // set module to false - user will NOT use this module in their project
       str = '$use-' + availableModules[k] + ': false;';
-      content.push(str);    
-    }  
+      content.push(str);
+    }
   }
 
   // add new line for better readability
